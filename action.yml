@@ -1,6 +1,6 @@
 ---
-name: Netlify Deploy
-author: Jo Colina
+name: Run Netlify Deploy Command
+author: cchitsiang
 description: Netlify Deploy
 inputs:
   NETLIFY_AUTH_TOKEN:
