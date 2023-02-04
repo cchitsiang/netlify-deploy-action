@@ -1,0 +1,74 @@
+---
+name: Netlify Deploy
+author: Jo Colina
+description: Netlify Deploy
+inputs:
+  NETLIFY_AUTH_TOKEN:
+    description: Auth token to use with netlify
+    required: true
+    default: ""
+  NETLIFY_SITE_ID:
+    description: Your Netlify site id
+    required: true
+    default: ""
+  NETLIFY_DEPLOY_TO_PROD:
+    description: Should the site be deployed to production?
+    required: false
+    default: false
+  NETLIFY_DEPLOY_MESSAGE:
+    description: A deploy message
+    required: false
+    default: ""
+  netlify_config_path:
+    description: Path to netlify config file
+    required: false
+    default: "./netlify.toml"
+  build_directory:
+    description: Directory where built files are stored
+    required: true
+    default: build
+  functions_directory:
+    description: Directory where built files are stored
+    required: false
+    default: ""
+  install_command:
+    description: Command to install dependencies
+    required: false
+    default: ""
+  build_command:
+    description: Command to build static website
+    required: false
+    default: npm run build
+  deploy_alias:
+    description: Deployment Subdomain name
+    required: false
+    default: ""
+outputs:
+  NETLIFY_OUTPUT:
+    description: netlify command output
+  NETLIFY_PREVIEW_URL:
+    description: deployment preview URL
+  NETLIFY_LOGS_URL:
+    description: deployment preview logs url
+  NETLIFY_LIVE_URL:
+    description: deployment URL
+runs:
+  using: composite
+  steps:
+      - run: ${{ github.action_path }}/entrypoint.sh
+        shell: bash
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ inputs.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ inputs.NETLIFY_SITE_ID }}
+          NETLIFY_DEPLOY_TO_PROD: ${{ inputs.NETLIFY_DEPLOY_TO_PROD }}
+          NETLIFY_DEPLOY_MESSAGE: ${{ inputs.NETLIFY_DEPLOY_MESSAGE }}
+          BUILD_DIRECTORY: ${{ inputs.build_directory }}
+          FUNCTIONS_DIRECTORY: ${{ inputs.functions_directory }}
+          INSTALL_COMMAND: ${{ inputs.install_command }}
+          BUILD_COMMAND: ${{ inputs.build_command }}
+          DEPLOY_ALIAS: ${{ inputs.deploy_alias }}
+
+      
+branding:
+  icon: activity
+  color: blue
