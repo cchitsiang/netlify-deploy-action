@@ -22,7 +22,6 @@ inputs:
   netlify_config_path:
     description: Path to netlify config file
     required: false
-    default: "./netlify.toml"
   build_directory:
     description: Directory where built files are stored
     required: true
@@ -62,6 +61,7 @@ runs:
           NETLIFY_SITE_ID: ${{ inputs.NETLIFY_SITE_ID }}
           NETLIFY_DEPLOY_TO_PROD: ${{ inputs.NETLIFY_DEPLOY_TO_PROD }}
           NETLIFY_DEPLOY_MESSAGE: ${{ inputs.NETLIFY_DEPLOY_MESSAGE }}
+          NETLIFY_CONFIG_PATH: ${{ inputs.netlify_config_path }}
           BUILD_DIRECTORY: ${{ inputs.build_directory }}
           FUNCTIONS_DIRECTORY: ${{ inputs.functions_directory }}
           INSTALL_COMMAND: ${{ inputs.install_command }}
