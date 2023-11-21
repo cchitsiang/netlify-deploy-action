@@ -40,6 +40,7 @@ then
   COMMAND+=" --alias ${DEPLOY_ALIAS}"
 fi
 
+netlify link
 OUTPUT=$(sh -c "$COMMAND")
 
 # Set outputs
